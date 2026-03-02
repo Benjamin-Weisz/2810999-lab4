@@ -1,6 +1,13 @@
 
 async function searchCountry(countryName) {
     const s = document.getElementById('loading-spinner');
+    const errEl = document.getElementById('error-message');
+    // clear any previous error as soon as a new search starts
+    if (errEl) {
+        errEl.textContent = '';
+        errEl.classList.add('hidden');
+    }
+
     try {
         // Show loading spinner
         if (s) s.classList.remove('hidden');
@@ -11,6 +18,11 @@ async function searchCountry(countryName) {
 
         // Update DOM
         const country = data[0];
+        // ensure error message stays hidden on success
+        if (errEl) {
+            errEl.textContent = '';
+            errEl.classList.add('hidden');
+        }
         document.getElementById('country-info').innerHTML = `<h2>${country.name.common}</h2>
         <p><strong>Capital:</strong> ${country.capital[0]}</p>
         <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
@@ -38,7 +50,13 @@ async function searchCountry(countryName) {
         // Show error message
         console.error(error);
         const errEl = document.getElementById('error-message');
-        if (errEl) errEl.textContent = 'Error fetching country data.';
+        if (errEl) {
+            errEl.textContent = 'Error fetching country data.';
+            errEl.classList.remove('hidden');
+        }
+        // also clear previous country info and borders since the search failed
+        document.getElementById('country-info').innerHTML = '';
+        document.getElementById('bordering-countries').innerHTML = '';
     } finally {
         // Always hide loading spinner
         if (s) s.classList.add('hidden');
