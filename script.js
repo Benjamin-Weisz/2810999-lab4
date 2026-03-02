@@ -31,7 +31,11 @@ async function searchCountry(countryName) {
 
         // Fetch bordering countries: name and flag for each neighbor
         const borders = country.borders || [];
-        document.getElementById('bordering-countries').innerHTML = '<h2>Bordering Countries:</h2>';
+        if (borders.length === 0) {
+            document.getElementById('bordering-countries').innerHTML= '<h2>No bordering countries.</h2>';
+        } else {
+            document.getElementById('bordering-countries').innerHTML = '<h2>Bordering Countries:</h2>';
+        }
         for (let countryCode of borders) {
             let response_b = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`);
             let data_b = await response_b.json();
