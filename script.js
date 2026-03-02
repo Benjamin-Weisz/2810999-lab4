@@ -31,8 +31,7 @@ async function searchCountry(countryName) {
 
         // Fetch bordering countries: name and flag for each neighbor
         const borders = country.borders || [];
-        // Clear previous bordering countries
-        document.getElementById('bordering-countries').innerHTML = '';
+        document.getElementById('bordering-countries').innerHTML = '<h2>Bordering Countries:</h2>';
         for (let countryCode of borders) {
             let response_b = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`);
             let data_b = await response_b.json();
@@ -51,7 +50,7 @@ async function searchCountry(countryName) {
         console.error(error);
         const errEl = document.getElementById('error-message');
         if (errEl) {
-            errEl.textContent = 'Error fetching country data.';
+            errEl.textContent = 'Invalid country name.';
             errEl.classList.remove('hidden');
         }
         // also clear previous country info and borders since the search failed
