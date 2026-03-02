@@ -15,7 +15,7 @@ async function searchCountry(countryName) {
         <p><strong>Capital:</strong> ${country.capital[0]}</p>
         <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
         <p><strong>Region:</strong> ${country.region}</p>
-        <img src="${country.flags.svg}" alt="${country.name.common} flag">`;
+        <img class="main-flag" src="${country.flags.svg}" alt="${country.name.common} flag">`;
 
         // Fetch bordering countries: name and flag for each neighbor
         const borders = country.borders || [];
@@ -25,9 +25,14 @@ async function searchCountry(countryName) {
             let response_b = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`);
             let data_b = await response_b.json();
             let border = data_b[0];
-            document.getElementById('bordering-countries').innerHTML += `<h3>${border.name.common}</h3>
-            <img src="${border.flags.svg}" alt="${border.name.common} flag">`;
+            document.getElementById('bordering-countries').innerHTML += `
+                <div class="border-item">
+                    <h3>${border.name.common}</h3>
+                    <img class="border-flag" src="${border.flags.svg}" alt="${border.name.common} flag">
+                </div>`;
         }
+
+
 
     } catch (error) {
         // Show error message

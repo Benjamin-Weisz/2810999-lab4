@@ -1,5 +1,11 @@
-.spinner {    /* Your styling */
-    animation: spin 1s linear infinite; /* Required */}
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 6px solid;
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 1s linear infinite;
+}
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -12,13 +18,40 @@
 }
 
 .border-grid {
-    display: grid; /* or display: flex */
+    display: flex;
+    flex-direction: column;
     /* Additional layout properties */
+}
+
+/* container for a bordering country row */
+.border-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+.border-item h3 {
+    margin: 0 0.5em 0 0;
+    font-size: 1rem;
+}
+
+.border-flag {
+    width: 50px;       /* or whatever you prefer */
+    height: auto;      /* keep the aspect ratio */
+    /* you can also use max‑width, max‑height, etc. */
 }
 
 .error {
     color: red;
     /* Additional styling */
+}
+
+/* main country flag sizing */
+.main-flag {
+    width: 75%;      /* take up 75% of its container width */
+    height: auto;
+    display: block;
+    margin: 0 auto;  /* center if you like */
 }
 
 .hidden {
